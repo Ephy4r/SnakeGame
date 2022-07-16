@@ -8,6 +8,9 @@ add_executable(${PROJECT_NAME}
 			src/main.cpp
 			src/Shader/Shader.hpp
 			src/Shader/Shader.cpp
+			src/stb_image.h
+			src/Texture/Texture.hpp
+			src/Texture/Texture.cpp
 			)
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
