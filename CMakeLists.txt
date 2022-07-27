@@ -11,6 +11,8 @@ add_executable(${PROJECT_NAME}
 			src/stb_image.h
 			src/Texture/Texture.hpp
 			src/Texture/Texture.cpp
+			src/Window/Window.hpp
+			src/Window/Window.cpp
 			)
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)

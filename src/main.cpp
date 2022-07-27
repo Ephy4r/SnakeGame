@@ -9,6 +9,7 @@
 
 #include "Shader/Shader.hpp"
 #include "Texture/Texture.hpp"
+#include "Window/Window.hpp"
 
 
 float vertices[] = {
@@ -84,26 +85,9 @@ int main(int args, char argv[])
 	// инициализируем glfw
 	glfwInit();	
 	// указываем версию OpenGL и core profile
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	// создаем окно
-	GLFWwindow* window = glfwCreateWindow(800, 600, "pesbarbos", nullptr, nullptr);
-	if (!window)
-	{
-		std::cerr << "Window wasn't initialised" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-	// делаем это окно активным(или основным, я не помню)
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	// инициализруем glad
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return -1;
-	}
+	
+	Window window(800, 600, "pesbarbos");
+	glfwSetWindowSizeCallback(window.getWindow(), framebuffer_size_callback);
 
 	Shader shader("C:/Users/Ksovox/OpenGl/SnakeGame/res/shaders/shader.vs"
 				, "C:/Users/Ksovox/OpenGl/SnakeGame/res/shaders/shader.fs");
@@ -157,7 +141,7 @@ int main(int args, char argv[])
 	glEnable(GL_DEPTH_TEST);
 	float rot = 0.1f;
 	// цикл рендеринга
-	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(window.getWindow()))
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -174,7 +158,7 @@ int main(int args, char argv[])
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		
 		// меняем буферы цвета
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(window.getWindow());
 		// проверка событий(и вызов соответствующих функций)
 		glfwPollEvents();
 	}
